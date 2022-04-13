@@ -31,7 +31,7 @@ def nms(dets, thresh):
         ovr = inter / (areas[i] + areas[order[1:]] - inter)
         #保留交集小于一定阈值的boundingbox
         inds = np.where(ovr <= thresh)[0]
-        order = order[inds + 1]
+        order = order[inds + 1] #为什么加1，相当于框0和从1以后的框算的iou，然后返回从0开始的索引
         
     return keep
 
