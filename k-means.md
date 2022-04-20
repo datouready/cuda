@@ -61,13 +61,15 @@ def k_means(boxes, k, dist=np.median):
         distances = 1 - wh_iou(boxes, clusters)
         
         # 计算每个bboxes距离最近的簇中心
-        current_nearest = np.argmin(distances, axis=1) #返回的是每个bounding box对应的anchor的 下标
+        current_nearest = np.argmin(distances, axis=1) #返回的是每个bounding box索引和对应的anchor的 下标
         
         # 每个簇中元素不在发生变化说明以及聚类完毕
         if (last_nearest == current_nearest).all():
             break  # clusters won't change
         for cluster in range(k):
             # 根据每个簇中的bboxes重新计算簇中心
+            # 怎么计算呢，哈哈，我来分析一波吧，累了，挺绕的
+            # current_nearest == cluster是将所有与cluster相等的位置设为1，其它为0，这样就可以拿到所有的boxes
             clusters[cluster] = dist(boxes[current_nearest == cluster], axis=0)
 
         last_nearest = current_nearest
