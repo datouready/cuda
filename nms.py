@@ -9,9 +9,9 @@ def nms(dets, thresh):
     scores = dets[:, 4] #confidence
     
     areas = (x2 - x1 + 1) * (y2 - y1 + 1) # 每个boundingbox的面积
-    order = scores.argsort()[::-1] # boundingbox的置信度排序
+    order = scores.argsort()[::-1] # boundingbox的置信度排序，返回索引下标
     keep = [] # 用来保存最后留下来的boundingbox
-    while order.size > 0:     
+    while order.size > 0: #这里记住size不是函数调用，size是属性   
         i = order[0] # 置信度最高的boundingbox的index
         keep.append(i) # 添加本次置信度最高的boundingbox的index
         
@@ -42,7 +42,13 @@ if __name__=="__main__":
                 [204, 102, 358, 250, 0.5],
                 [257, 118, 380, 250, 0.7],
                 [280, 135, 400, 250, 0.6],
-                [255, 118, 360, 235, 0.7]])
-    thresh = 0.3
+                [255, 118, 360, 235, 0.7],
+                [205, 102, 358, 250, 0.5],
+                [258, 118, 380, 250, 0.7],
+                [281, 135, 400, 250, 0.6],
+                [256, 118, 360, 235, 0.7]
+                
+                ])
+    thresh = 0.6
     nms(dets,thresh)
     print(0)
