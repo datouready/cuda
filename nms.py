@@ -30,7 +30,7 @@ def nms(dets, thresh):
         # 交叉区域面积 / (bbox + 某区域面积 - 交叉区域面积)
         ovr = inter / (areas[i] + areas[order[1:]] - inter)
         #保留交集小于一定阈值的boundingbox
-        inds = np.where(ovr <= thresh)[0]
+        inds = np.where(ovr <= thresh)[0] #返回的是坐标tuple,[0]表示维度0轴的位置，[1]返回的是1轴的位置，这里好像没有1轴
         order = order[inds + 1] #为什么加1，相当于框0和从1以后的框算的iou，然后返回从0开始的索引
         
     return keep
