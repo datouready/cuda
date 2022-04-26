@@ -1,6 +1,6 @@
 import numpy as np
 
-
+#还可以使用偏移量，实现多个类别一次nms
 def nms(dets, thresh):
     x1 = dets[:, 0] #xmin
     y1 = dets[:, 1] #ymin
